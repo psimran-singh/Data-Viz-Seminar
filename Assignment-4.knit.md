@@ -5,10 +5,7 @@ date: "2/4/2022"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
-```
+
 
 ## Description of Task
 For this assignment we are tasked with importing a dataset into a R dataframe. The data I will use is the solar panel installations registry from the New Jersey Board of Public Utilities' Clean Energy Program. This data is publicly available.
@@ -23,7 +20,8 @@ https://github.com/psimran-singh/Data-Viz-Seminar-Assignment-4
 
 I will import the data into an R dataframe using read.csv().
 
-```{r Import Data, echo=TRUE}
+
+```r
 setwd("~/GitHub/Data-Viz-Seminar")
 
 SRP_Data <- read.csv("SRP Data.csv")
@@ -37,21 +35,16 @@ I will then arrange the total system sizes in descending order within each count
 
 And finally I will rename the columns so they all follow a similar naming convention.
 
-```{r Clean Data, echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
+
+```r
 SRP_Data_Agg <- SRP_Data %>%
   group_by(County......................Code) %>%
   summarise(total_system_size = sum(Calculated.Total.System.Size)) %>%
   arrange(desc(total_system_size),.by_group=TRUE) %>%
   rename('county_code' = County......................Code)
-
 ```
 ## Plotting the data
 
 I will now plot the data in a histogram to get an idea of how it looks.
 
-```{r Plot Data, echo=FALSE}
-plot(SRP_Data_Agg$total_system_size, type = "h",
-      main = "Total Solar Panel Installations by County for New Jersey",
-      xlab = "County Code",
-      ylab = "Total System Size (kW)")
-```
+![](Assignment-4_files/figure-latex/Plot Data-1.pdf)<!-- --> 
