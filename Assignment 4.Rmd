@@ -29,21 +29,20 @@ setwd("~/GitHub/Data-Viz-Seminar")
 SRP_Data <- read.csv("SRP Data.csv")
 ```
 
-## Cleaning the data
+## Aggregating the data
 
-Since this data is very currently very granular (at individual installation level), I will aggregate it by grouping by the county and customer type variables and summing up total system size for each category.
+Since this data is very currently very granular (at individual installation level), I will aggregate it by grouping by the county code variable and summing up total system size for county.
 
 I will then arrange the total system sizes in descending order within each county code.
 
 And finally I will rename the columns so they all follow a similar naming convention.
 
-```{r Clean Data, echo=TRUE, results='hide}
+```{r Clean Data, echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
 SRP_Data_Agg <- SRP_Data %>%
-  group_by(County......................Code,Customer.Type) %>%
+  group_by(County......................Code) %>%
   summarise(total_system_size = sum(Calculated.Total.System.Size)) %>%
   arrange(desc(total_system_size),.by_group=TRUE) %>%
-  rename('county_code' = County......................Code,
-    'customer_type' = Customer.Type)
+  rename('county_code' = County......................Code)
 
 ```
 ## Plot the data and take a look!
@@ -51,3 +50,8 @@ SRP_Data_Agg <- SRP_Data %>%
 I will now plot the data in a histogram to get an idea of how it looks.
 
 ```{r Plot Data, echo=FALSE}
+plot(SRP_Data_Agg$total_system_size, type = "h",
+      main = "Total Solar Panel Installations by County for New Jersey",
+      xlab = "County Code",
+      ylab = "Total System Size (kW)")
+```
