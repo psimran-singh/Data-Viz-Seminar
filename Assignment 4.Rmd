@@ -1,0 +1,21 @@
+---
+title: "Data Visualization - Assignment 4"
+author: "Simran Singh"
+date: "2/4/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Description of Task
+For this assignment we are tasked with importing a dataset into a R dataframe. The data I will use is the solar panel installations registry from the New Jersey Board of Public Utilities' Clean Energy Program. 
+
+This data comes in .csv format so it will be fairly straightforward to import into R. However, there are two NJBPU programs that we would like to import and join to each other to ensure that there is complete coverage for all solar installations in NJ (SRP Program and TI Program). 
+
+## Importing the data
+```{r cars}
+
+```
+
